@@ -1,0 +1,9 @@
+#package json 
+node_modules/
+
+#prod 
+.cache/ 
+dist/ 
+.coverage/ 
+.vscode/
+.env

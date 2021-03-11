@@ -1,0 +1,25 @@
+{
+  "name": "adopt-me",
+  "version": "1.0.0",
+  "description": "Course for introduction into react ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint \"src/**/*.{js,jsx}\" --quiet"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mahamadou828/complete-intro-into-react-v5.git"
+  },
+  "author": "@MahamadouSamake",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mahamadou828/complete-intro-into-react-v5/issues"
+  },
+  "homepage": "https://github.com/Mahamadou828/complete-intro-into-react-v5#readme",
+  "devDependencies": {
+    "eslint": "^7.21.0",
+    "eslint-config-prettier": "^8.1.0",
+    "prettier": "^2.2.1"
+  }
+}
