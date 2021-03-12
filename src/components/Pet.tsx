@@ -1,7 +1,24 @@
+import { Photo } from '@frontendmasters/pet';
 import { Link } from '@reach/router';
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 
-export const Pet = ({ name, animal, breed, photos, location, id }) => {
+interface IProps {
+  name: string;
+  animal: string;
+  breed: string;
+  photos: Photo[];
+  location: string;
+  id: number;
+}
+
+export const Pet: FunctionComponent<IProps> = ({
+  name,
+  animal,
+  breed,
+  photos,
+  location,
+  id,
+}) => {
   let hero = 'http://placecorgi.com/260/180';
   if (photos.length) {
     hero = photos[0].small;

@@ -1,7 +1,12 @@
-import React from 'react';
+import { Animal } from '@frontendmasters/pet';
+import React, { FunctionComponent } from 'react';
 import { Pet } from './Pet';
 
-export const Result = ({ pets }) => {
+interface IProps {
+  pets: Animal[];
+}
+
+export const Result: FunctionComponent<IProps> = ({ pets }) => {
   return (
     <div className="search">
       {pets.length === 0 ? (

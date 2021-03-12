@@ -1,27 +1,56 @@
-import pet from '@frontendmasters/pet';
-import { navigate } from '@reach/router';
+import pet, { Photo } from '@frontendmasters/pet';
+import { navigate, RouteComponentProps } from '@reach/router';
 import React, { Component } from 'react';
 import Carousel from '../components/Carousel';
 import { Modal } from '../components/Modal';
 import ThemeContext from '../context/theme';
 import ErrorBoundary from '../helpers/ErrorBoundary';
-export default class Details extends Component {
-  constructor(props) {
+
+interface Props {
+  id: string;
+}
+
+interface State {
+  loading: boolean;
+  showModal: boolean;
+  url: string;
+  location: string;
+  name: string;
+  photos: Photo[];
+  animal: string;
+  breed: string;
+  description: string;
+}
+
+export default class Details extends Component<
+  RouteComponentProps<Props>,
+  State
+> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       loading: true,
       showModal: false,
       url: '',
+      location: '',
+      name: '',
+      photos: [],
+      animal: '',
+      breed: '',
+      description: '',
     };
     this.toggleModal = this.toggleModal.bind(this);
   }
   async componentDidMount() {
-    const { animal } = await pet.animal(this.props.id);
+    if (!this.props.id) return navigate('/');
+    const { animal } = await pet.animal(+this.props.id);
     this.setState({
-      ...animal,
       location: `${animal.contact.address.city}, ${animal.contact.address.state}`,
       breed: animal.breeds.primary,
       loading: false,
+      photos: animal.photos,
+      animal: animal.name,
+      name: animal.name,
     });
   }
 
@@ -72,7 +101,7 @@ export default class Details extends Component {
   }
 }
 
-export function DetailsWithErrorBoundary(props) {
+export function DetailsWithErrorBoundary(props: RouteComponentProps<Props>) {
   return (
     <ErrorBoundary>
       <Details {...props} />

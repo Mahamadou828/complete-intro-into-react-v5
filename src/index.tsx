@@ -1,10 +1,9 @@
 import { Link, Router } from '@reach/router';
-import React, { lazy, Suspense, useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import { render } from 'react-dom';
 import { SearchParam } from './components/SearchParam';
 import ThemeContext from './context/theme';
-const Details = lazy(() => import('./pages/Details'));
-
+import Details from './pages/Details';
 const App = () => {
   const themeHook = useState('darkblue');
   return (
@@ -29,3 +28,5 @@ render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+export default App;
