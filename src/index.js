@@ -1,6 +1,7 @@
-import { Link, Router } from '@reach/router';
+import { Router } from '@reach/router';
 import React, { useState } from 'react';
 import { render } from 'react-dom';
+import { Navbar } from './components/Navbar';
 import { SearchParam } from './components/SearchParam';
 import ThemeContext from './context/theme';
 import Details from './pages/Details';
@@ -10,9 +11,7 @@ const App = () => {
   return (
     <ThemeContext.Provider value={themeHook}>
       <div>
-        <header>
-          <Link to="/">Adopt Me</Link>
-        </header>
+        <Navbar />
 
         <Router>
           <SearchParam path="/" />
