@@ -1,20 +1,20 @@
 import pet, { ANIMALS } from '@frontendmasters/pet';
-import React, { useContext, useEffect, useState } from 'react';
-import ThemeContext from '../context/theme';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import updateLocation from '../action/changeLocation';
+import updateTheme from '../action/changeTheme';
 import { useDropdown } from '../hooks/useDropdown';
 import { Result } from './Result';
 
-export function SearchParam() {
-  const [location, setLocation] = useState('Seattle, WA');
+export function UNCONNECTED_SearchParam(props) {
   const [animal, AnimalDropdown] = useDropdown('Animal', 'dog', ANIMALS);
   const [breeds, setBreeds] = useState([]);
   const [breed, BreedDropdown, setBreed] = useDropdown('Breed', '', breeds);
   const [pets, setPets] = useState([]);
-  const [theme, setTheme] = useContext(ThemeContext);
 
   const requestPets = async () => {
     const { animals: apiAnimals } = await pet.animals({
-      location,
+      location: props.location,
       breed,
       type: animal,
     });
@@ -49,21 +49,21 @@ export function SearchParam() {
           <input
             type="text"
             id="location"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
+            value={props.location}
+            onChange={(e) => updateLocation(e.target.value)}
             placeholder="location"
           />
-          <button style={{ background: theme }}>submit</button>
+          <button style={{ background: props.theme }}>submit</button>
         </label>
         <AnimalDropdown />
         <BreedDropdown />
         <label htmlFor="theme">
           Theme
           <select
-            value={theme}
+            value={props.theme}
             id="theme"
-            onChange={(e) => setTheme(e.target.value)}
-            onBlur={(e) => setTheme(e.target.value)}
+            onChange={(e) => updateTheme(e.target.value)}
+            onBlur={(e) => updateTheme(e.target.value)}
           >
             <option value="peru">peru</option>
             <option value="darkblue">darkblue</option>
@@ -76,3 +76,18 @@ export function SearchParam() {
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  theme: state.theme,
+  location: state.location,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  updateLocation: (location) => dispatch(updateLocation(location)),
+  updateTheme: (theme) => dispatch(updateTheme(theme)),
+});
+
+export const SearchParam = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UNCONNECTED_SearchParam);
