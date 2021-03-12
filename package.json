@@ -9,7 +9,8 @@
     "dev": "parcel src/index.html",
     "dev:mock": "cross-env PET_MOCK=mock parcel src/index.html",
     "lint": "tslint --project",
-    "start": "npm run build && babel-node server/index.js"
+    "start": "npm run build && babel-node server/index.js",
+    "typecheck": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
